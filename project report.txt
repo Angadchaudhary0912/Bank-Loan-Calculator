@@ -1,0 +1,180 @@
+                   C- project
+Name: Angad Chaudhary
+SAP ID: 590026262
+B-45
+Project title: bank loan calculator
+
+
+
+
+
+
+
+
+
+
+
+
+	Abstract 
+The Bank Loan Calculator is a simple C program that calculates the Equated Monthly Installment (EMI) for a bank loan. The user inputs the loan amount, annual interest rate, and loan duration in years, and the program outputs the monthly EMI, total payment, and total interest.
+This project demonstrates modular programming, separating code into functions, header files, and source files, making it organized and maintainable. It provides a user-friendly console application to plan loan repayments efficiently.
+
+
+
+
+
+
+
+
+
+	Problem Definition
+Calculating EMI manually can be time-consuming and error-prone, especially for varying loan amounts, durations, and interest rates.
+Problem Statement:
+Develop a program that can:
+	Take loan amount, interest rate, and loan duration as input.
+	Calculate monthly EMI, total amount payable, and total interest.
+	Display the results clearly in the console for the user.
+
+
+
+
+
+
+
+
+
+3. System Design (Flowcharts & Algorithms)
+Algorithm
+	Start the program.
+	Input loan amount, annual interest rate, and loan duration in years.
+	Calculate monthly interest rate: R = annual_rate / 12 / 100.
+	Calculate total number of months: N = years × 12.
+	Calculate EMI using the formula:
+EMI=(P⋅R⋅(1+R)^N)/((1+R)^N-1)
+
+	Calculate total payment: total_payment = EMI × N.
+	Calculate total interest: total_interest = total_payment - P.
+	Display the results.
+	End program.
+
+
+
+	Flowchart 
+Start
+  │
+  ▼
+Input Loan Amount, Interest Rate, Duration
+  │
+  ▼
+Call calculateEMI
+  │
+  ▼
+Call calculateTotalPayment
+  │
+  ▼
+Call calculateTotalInterest
+  │
+  ▼
+Display Results
+  │
+  ▼
+End
+	Implementation Details 
+Header File (loan.h)
+#ifndef LOAN_H
+#define LOAN_H
+
+float calculateEMI(float P, float annual_rate, int years);
+float calculateTotalPayment(float EMI, int years);
+float calculateTotalInterest(float total_payment, float P);
+
+#endif
+
+
+Function Definitions (loan.c)
+#include <math.h>
+#include "loan.h"
+
+float calculateEMI(float P, float annual_rate, int years) {
+    float R = annual_rate / 12 / 100;
+    int N = years * 12;
+    return (P * R * pow(1 + R, N)) / (pow(1 + R, N) - 1);
+}
+
+float calculateTotalPayment(float EMI, int years) {
+    int N = years * 12;
+    return EMI * N;
+}
+
+float calculateTotalInterest(float total_payment, float P) {
+    return total_payment - P;
+}
+
+Main Program (main.c)
+
+#include <stdio.h>
+#include "loan.h"
+
+int main() {
+    float P, annual_rate, EMI, total_payment, total_interest;
+    int years;
+
+    printf("Enter Loan Amount: ");
+    scanf("%f", &P);
+
+    printf("Enter Annual Interest Rate (in %%): ");
+    scanf("%f", &annual_rate);
+
+    printf("Enter Loan Duration (in years): ");
+    scanf("%d", &years);
+
+    EMI = calculateEMI(P, annual_rate, years);
+    total_payment = calculateTotalPayment(EMI, years);
+    total_interest = calculateTotalInterest(total_payment, P);
+
+    printf("\n------ Loan EMI Calculation Result ------\n");
+    printf("Monthly EMI: %.2f\n", EMI);
+    printf("Total Amount Payable: %.2f\n", total_payment);
+    printf("Total Interest Paid: %.2f\n", total_interest);
+
+    return 0;
+}
+
+	 Testing & Results
+
+Input:
+Loan Amount: 100000
+Annual Interest Rate: 10%
+Loan Duration: 5 years
+Output:
+Monthly EMI: 2124.70
+Total Amount Payable: 127482.00
+Total Interest Paid: 27482.00
+
+
+
+
+
+
+
+
+
+
+
+	 Conclusion & Future Work
+
+Conclusion:
+The Bank Loan Calculator accurately calculates EMI, total payment, and interest for any loan. The project demonstrates C programming concepts such as functions, header files, and modular programming, and provides a simple console-based application.
+Future Work:
+	Support for different types of loans (home, personal, car) with varying interest rules.
+	Develop a GUI-based version for easier use.
+	Add file saving/loading of loan records.
+
+
+
+
+
+
+
+
+
